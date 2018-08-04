@@ -6,19 +6,6 @@ menufile="$HOME/.larbs-wizard/choices.csv"
 progsfile="$HOME/.larbs-wizard/installable.csv"
 specdir="$HOME/.larbs-wizard/wrappers"
 
-# Give packerwrapper a list of programs. Finds only those needing installation
-# then, it sorts them into $mainqueue and $aurqueue for progs installable from
-# main repo or AUR.
-posprogs=$(pacman -Sl | awk '{print $2}')
-packerwrapper() { \
-	for arg in "$@"
-	do
-		pacman -Q "$arg" &>/dev/null && continue
-		pacman -Qg "$arg" &>/dev/null && continue
-		grep "^$arg$" <<< $posprogs &>/dev/null  && mainqueue="$mainqueue $arg" && continue
-		aurqueue="$queue $arg"
-	done ;}
-
 tmpdir=$(mktemp -d)
 
 # Construct menu file.  For some reasons, it's easier to constuct it on the fly
@@ -42,14 +29,10 @@ chosen=$(cat $tmpdir/choice)
 # Quit script if preinstall script returned error or if user ended it.
 [[ ! $? -eq 0 ]] && clear &&  exit
 
+clear
 # Run the `packerwrapper` script on all the programs tagged with the chosen tag
 # in the progs file.
-packerwrapper $(grep "^$chosen" "$progsfile" | cut -d ',' -f2)
-
-clear
-# If there
-[[ ! "$mainqueue" == "" ]] && sudo pacman --needed --noconfirm -S $mainqueue
-[[ ! "$aurqueue" == "" ]] && packer --noconfirm -S $aurqueue
+packer -S $(grep "^$chosen" "$progsfile" | cut -d ',' -f2)
 
 # Post installation script.
 [[ -f  $specdir/$chosen.post ]] && bash $specdir/$chosen.post

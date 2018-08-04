@@ -1,8 +1,11 @@
 #!/bin/bash
-[[ -d ~/.config/mutt ]] &&
+if [[ -d ~/.config/mutt ]]; then
 dialog --defaultno --title "Email system setup" --yesno "You already have a ~/.config/mutt folder or other email settings. If you select yes to continue, your previous configs will be appended with '_backup'." 7 60 || exit 1
-
 dialog --title "Please wait." --infobox "Backing up configs..."  7 60
 mv ~/.config/mutt ~/.config/mutt_backup
 mv ~/.offlineimaprc ~/.offlineimaprc_backup
-git clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt
+fi
+
+dialog --title "Please wait." --infobox "Downloading mutt-wizard"  7 60
+git clone https://github.com/lukesmithxyz/mutt-wizard ~/.config/mutt &>/dev/null
+clear

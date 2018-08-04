@@ -1,0 +1,4 @@
+#!/bin/bash
+# Install R Markdown if R was chosen and installed.
+dialog --title "Please wait." --infobox "Installing R Markdown..."  7 60
+[[ -d /usr/lib/R/library/rmarkdown ]] || echo "install.packages('rmarkdown')" | sudo R -q --no-save

@@ -1,0 +1,5 @@
+#!/bin/bash
+dialog --defaultno --title "urxvt installation" --yesno "Selecting yes will install URXVT as your terminal with all the best modules.
+
+It will also set your \$TERMINAL variable to 'urxvt' which will make it default on reboot." 9 60 || exit 1
+

@@ -1,0 +1,2 @@
+#!/bin/bash
+dialog --title "Email system setup" --msgbox "Installation now complete. You can now run \`muttwizard\` in the terminal and follow the redirections for configuring your email account." 7 60

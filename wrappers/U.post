@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sed -i "s/^export TERMINAL=.*/export TERMINAL=\"urxvt\"/g" ~/.profile
+
+dialog --title "urxvt installed." --msgbox "URXVT has been installed and set as your default terminal. You must reboot or log out and back in for this change to be complete.
+
+If you get tired of urxvt, open ~/.profile and change the TERMINAL variable to \"st\" or another terminal of your choice (and reboot)." 10 60
+

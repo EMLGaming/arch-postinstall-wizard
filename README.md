@@ -3,7 +3,7 @@
 **NOTE TO PEOPLE WHO AREN'T LUKE:** This isn't ready for use yet. It's just up
 on Github now for my convenience as I'm testing things. I'll say when it's
 ready. You're welcome to check out the idea and provide feedback, but don't
-expect it to werk.
+expect it to work.
 
 This is a brief dialog menu that allows the user to install additional programs
 and change minor settings.
